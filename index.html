@@ -1095,7 +1095,7 @@
   let isAssignmentsGenerated = false;
   let currentPlayerName = "";
 
-  function generateSecretFriends() {
+function generateSecretFriends() {
     if (isAssignmentsGenerated) return;
 
     secretFriends = {};
@@ -1109,7 +1109,7 @@
     secretFriends["Andrea"] = "Julian Bolaños";
 
     secretFriends["Julian Bolaños"] = "Camilo Meneses";
-    secretFriends["Camilo Meneses"] = "Anderson Castillo";
+    secretFriends["Camilo Meneses"] = "Mileidy"; // ✅ corregido (sin espacio extra)
 
     secretFriends["Anderson Castillo"] = "David";
     secretFriends["David"] = "Jorgito";
@@ -1123,12 +1123,12 @@
 
     // Bloque delicado → separamos Nikol y Mileidy
     secretFriends["Nikol Yulian"] = "Yenny";
-    secretFriends["Yenny"] = "Mileidy";
+    secretFriends["Yenny"] = "Anderson Castillo";
     secretFriends["Mileidy"] = "Nikol Yulian";
 
     isAssignmentsGenerated = true;
     console.table(secretFriends);
-  }
+}
 
   function startGame() {
     generateSecretFriends();
