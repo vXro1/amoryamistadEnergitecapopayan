@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -14,8 +15,8 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #ff6b9d 0%, #f06292 25%, #e91e63 50%, #ad1457 75%, #880e4f 100%);
-            background-size: 300% 300%;
-            animation: dynamicGradient 6s ease infinite;
+            background-size: 400% 400%;
+            animation: dynamicGradient 8s ease infinite;
             min-height: 100vh;
             overflow-x: hidden;
             -webkit-user-select: none;
@@ -24,13 +25,28 @@
         }
 
         @keyframes dynamicGradient {
-            0% { background-position: 0% 50%; }
-            33% { background-position: 100% 0%; }
-            66% { background-position: 0% 100%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 100% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
+
+            75% {
+                background-position: 0% 100%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        /* Partículas flotantes interactivas */
+        /* Partículas flotantes interactivas mejoradas */
         .particles {
             position: fixed;
             top: 0;
@@ -43,11 +59,42 @@
 
         .particle {
             position: absolute;
+            border-radius: 50%;
+            animation: floatUp 10s infinite linear;
+        }
+
+        .particle.heart-particle {
+            width: 8px;
+            height: 7px;
+            background: #ff69b4;
+            transform: rotate(-45deg);
+            border-radius: 4px 4px 0 4px;
+        }
+
+        .particle.heart-particle::before,
+        .particle.heart-particle::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 6px;
+            background: #ff69b4;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .particle.heart-particle::before {
+            top: -3px;
+            left: 0;
+        }
+
+        .particle.heart-particle::after {
+            top: -3px;
+            right: 0;
+        }
+
+        .particle.circle-particle {
             width: 6px;
             height: 6px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: floatUp 8s infinite linear;
+            background: rgba(255, 192, 203, 0.8);
         }
 
         @keyframes floatUp {
@@ -55,13 +102,16 @@
                 transform: translateY(100vh) scale(0) rotate(0deg);
                 opacity: 0;
             }
+
             10% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             90% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(-10vh) scale(0) rotate(360deg);
                 opacity: 0;
@@ -70,7 +120,7 @@
 
         .container {
             min-height: 100vh;
-            padding: 10px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -79,20 +129,22 @@
             z-index: 10;
         }
 
-        /* Pantalla de Inicio con efecto glassmorphism */
+        /* Pantalla de Inicio con efecto glassmorphism mejorado */
         .welcome-screen {
             text-align: center;
             color: white;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px 25px;
-            border-radius: 25px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.15);
+            padding: 50px 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             width: 100%;
-            max-width: 380px;
-            transform: scale(0.95);
-            animation: welcomeEntrance 1s ease forwards;
+            max-width: 420px;
+            transform: scale(0.9);
+            animation: welcomeEntrance 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         @keyframes welcomeEntrance {
@@ -102,50 +154,60 @@
         }
 
         .welcome-title {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #ffffff, #ffc0cb, #ffffff);
-            background-size: 200% 200%;
-            animation: textShimmer 3s ease infinite;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #ffffff, #ffc0cb, #ff69b4, #ffffff);
+            background-size: 300% 300%;
+            animation: textShimmer 4s ease infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
         }
 
         @keyframes textShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .welcome-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
         }
 
         .welcome-description {
-            font-size: 1rem;
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
         }
 
         .start-btn {
-            background: linear-gradient(135deg, #ffffff, #ffc0cb);
+            background: linear-gradient(135deg, #ffffff, #ffc0cb, #ff69b4);
             border: none;
             border-radius: 50px;
-            padding: 18px 35px;
+            padding: 20px 40px;
             color: #c2185b;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow:
+                0 15px 30px rgba(255, 255, 255, 0.3),
+                0 5px 15px rgba(255, 105, 180, 0.2);
             width: 100%;
-            max-width: 280px;
+            max-width: 300px;
             position: relative;
             overflow: hidden;
         }
@@ -158,106 +220,114 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.5s ease;
+            transition: left 0.6s ease;
         }
 
         .start-btn:hover::before {
             left: 100%;
         }
 
-        .start-btn:hover, .start-btn:active {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+        .start-btn:hover,
+        .start-btn:active {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow:
+                0 20px 40px rgba(255, 255, 255, 0.4),
+                0 10px 25px rgba(255, 105, 180, 0.3);
         }
 
-        /* Área del Juego */
+        /* Área del Juego mejorada */
         .game-area {
             display: none;
             width: 100%;
-            max-width: 420px;
-            animation: gameEntrance 0.8s ease;
+            max-width: 450px;
+            animation: gameEntrance 1s ease;
         }
 
         @keyframes gameEntrance {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px) scale(0.9);
             }
+
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
         .section-title {
             text-align: center;
             color: white;
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 30px 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .section-title h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ffffff, #ffc0cb);
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #ffc0cb, #ff69b4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .section-title p {
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            opacity: 0.95;
         }
 
         /* Grid de jugadores con efectos hover avanzados */
         .players-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 18px;
+            margin-bottom: 30px;
             max-height: 65vh;
             overflow-y: auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
         }
 
         .players-grid::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         .players-grid::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 15px;
         }
 
         .players-grid::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #ffc0cb, #ff69b4);
-            border-radius: 10px;
+            border-radius: 15px;
         }
 
         .player-btn {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 192, 203, 0.8));
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px 10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 192, 203, 0.85));
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 25px 12px;
             color: #c2185b;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
             text-align: center;
-            min-height: 70px;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -274,37 +344,40 @@
             height: 0;
             background: radial-gradient(circle, rgba(255, 105, 180, 0.3), transparent);
             border-radius: 50%;
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
             transform: translate(-50%, -50%);
         }
 
         .player-btn:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
         }
 
-        .player-btn:hover, .player-btn:active {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.4);
-            border-color: rgba(255, 105, 180, 0.6);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 192, 203, 0.9));
+        .player-btn:hover,
+        .player-btn:active {
+            transform: translateY(-10px) scale(1.08);
+            box-shadow:
+                0 20px 40px rgba(255, 105, 180, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 105, 180, 0.7);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 192, 203, 0.95));
         }
 
-        /* Modal de Privacidad mejorado */
-        .privacy-modal {
+        /* Modal de contraseña mejorado */
+        .password-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 20px;
-            animation: modalFadeIn 0.4s ease;
+            animation: modalFadeIn 0.5s ease;
         }
 
         @keyframes modalFadeIn {
@@ -312,208 +385,304 @@
                 opacity: 0;
                 backdrop-filter: blur(0px);
             }
+
             to {
                 opacity: 1;
-                backdrop-filter: blur(10px);
+                backdrop-filter: blur(15px);
             }
         }
 
-        .privacy-content {
+        .password-content {
             background: linear-gradient(135deg, #ff6b9d, #e91e63, #ad1457);
-            border-radius: 25px;
-            padding: 35px 25px;
+            border-radius: 30px;
+            padding: 40px 30px;
             text-align: center;
             color: white;
             width: 100%;
-            max-width: 360px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            animation: modalSlideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 380px;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(25px);
+            animation: modalSlideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes modalSlideUp {
             from {
-                transform: translateY(50px) scale(0.9);
+                transform: translateY(60px) scale(0.8);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0) scale(1);
                 opacity: 1;
             }
         }
 
-        .privacy-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        .password-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
             font-weight: bold;
         }
 
-        .privacy-text {
-            font-size: 1.05rem;
+        .password-text {
+            font-size: 1.1rem;
             margin-bottom: 30px;
-            line-height: 1.6;
+            line-height: 1.7;
             opacity: 0.95;
         }
 
-        .continue-btn {
+        .password-input {
+            width: 100%;
+            max-width: 280px;
+            padding: 18px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            font-size: 1.1rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            color: #c2185b;
+            font-weight: 600;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .password-input::placeholder {
+            color: rgba(194, 24, 91, 0.6);
+        }
+
+        .password-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .verify-btn,
+        .cancel-btn {
             background: rgba(255, 255, 255, 0.9);
             color: #c2185b;
             border: none;
-            border-radius: 50px;
-            padding: 16px 30px;
+            border-radius: 25px;
+            padding: 16px 25px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.4s ease;
-            width: 100%;
-            max-width: 220px;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+            flex: 1;
+            max-width: 120px;
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
 
-        .continue-btn:hover, .continue-btn:active {
+        .verify-btn:hover,
+        .cancel-btn:hover {
             background: white;
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
         }
 
-        /* Área de revelación con efectos espectaculares */
+        .cancel-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .error-message {
+            color: #ffcdd2;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Área de revelación con efectos espectaculares mejorada */
         .reveal-area {
             display: none;
             text-align: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 35px 25px;
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 30px;
+            padding: 40px 30px;
+            backdrop-filter: blur(25px);
             border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: revealEntrance 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            animation: revealEntrance 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         @keyframes revealEntrance {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.8);
+                transform: translateY(60px) scale(0.7);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
 
-        /* Corazón 3D interactivo */
+        /* Corazón 3D interactivo mejorado */
         .heart-container {
-            margin: 25px 0;
+            margin: 30px 0;
             position: relative;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
         .heart-3d {
-            width: 120px;
-            height: 108px;
+            width: 140px;
+            height: 126px;
             margin: 0 auto;
             position: relative;
             transform-style: preserve-3d;
-            animation: heart3DRotate 4s ease-in-out infinite;
+            animation: heart3DRotate 6s ease-in-out infinite;
         }
 
         @keyframes heart3DRotate {
-            0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
-            25% { transform: rotateY(90deg) rotateX(10deg); }
-            50% { transform: rotateY(180deg) rotateX(0deg); }
-            75% { transform: rotateY(270deg) rotateX(-10deg); }
+
+            0%,
+            100% {
+                transform: rotateY(0deg) rotateX(0deg) scale(1);
+            }
+
+            25% {
+                transform: rotateY(90deg) rotateX(15deg) scale(1.1);
+            }
+
+            50% {
+                transform: rotateY(180deg) rotateX(0deg) scale(1.2);
+            }
+
+            75% {
+                transform: rotateY(270deg) rotateX(-15deg) scale(1.1);
+            }
         }
 
         .heart {
-            width: 120px;
-            height: 108px;
-            background: linear-gradient(135deg, #ff69b4, #ff1744, #e91e63);
+            width: 140px;
+            height: 126px;
+            background: linear-gradient(135deg, #ff69b4, #ff1744, #e91e63, #ff69b4);
+            background-size: 300% 300%;
+            animation: heartColorShift 3s ease infinite, heartGlow 2.5s ease-in-out infinite alternate;
             transform: rotate(-45deg);
-            border-radius: 60px 60px 0 60px;
-            box-shadow: 
-                0 0 20px rgba(255, 105, 180, 0.6),
-                0 0 40px rgba(255, 105, 180, 0.4),
-                0 0 60px rgba(255, 105, 180, 0.2);
-            animation: heartGlow 2s ease-in-out infinite alternate;
+            border-radius: 70px 70px 0 70px;
             position: relative;
+        }
+
+        @keyframes heartColorShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .heart:before,
         .heart:after {
             content: '';
-            width: 60px;
-            height: 96px;
+            width: 70px;
+            height: 112px;
             position: absolute;
-            background: linear-gradient(135deg, #ff69b4, #ff1744, #e91e63);
-            border-radius: 60px 60px 0 0;
+            background: linear-gradient(135deg, #ff69b4, #ff1744, #e91e63, #ff69b4);
+            background-size: 300% 300%;
+            animation: heartColorShift 3s ease infinite;
+            border-radius: 70px 70px 0 0;
         }
 
         .heart:before {
-            top: -48px;
+            top: -56px;
             left: 0;
         }
 
         .heart:after {
-            top: -48px;
+            top: -56px;
             right: 0;
         }
 
         @keyframes heartGlow {
             from {
-                box-shadow: 
-                    0 0 20px rgba(255, 105, 180, 0.6),
-                    0 0 40px rgba(255, 105, 180, 0.4),
-                    0 0 60px rgba(255, 105, 180, 0.2);
-                transform: rotate(-45deg) scale(1);
+                box-shadow:
+                    0 0 25px rgba(255, 105, 180, 0.6),
+                    0 0 50px rgba(255, 105, 180, 0.4),
+                    0 0 75px rgba(255, 105, 180, 0.2);
+                filter: brightness(1);
             }
+
             to {
-                box-shadow: 
-                    0 0 30px rgba(255, 105, 180, 0.8),
-                    0 0 60px rgba(255, 105, 180, 0.6),
-                    0 0 90px rgba(255, 105, 180, 0.4);
-                transform: rotate(-45deg) scale(1.1);
+                box-shadow:
+                    0 0 40px rgba(255, 105, 180, 0.9),
+                    0 0 80px rgba(255, 105, 180, 0.7),
+                    0 0 120px rgba(255, 105, 180, 0.5);
+                filter: brightness(1.2);
             }
         }
 
         .result-text {
             color: white;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .result-text h2 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
             font-weight: bold;
-            background: linear-gradient(45deg, #ffffff, #ffc0cb);
+            background: linear-gradient(45deg, #ffffff, #ffc0cb, #ff69b4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .secret-friend {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #c2185b;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 192, 203, 0.9));
-            padding: 20px 25px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 192, 203, 0.95));
+            padding: 25px 30px;
+            border-radius: 25px;
             display: inline-block;
-            box-shadow: 
-                0 10px 30px rgba(255, 255, 255, 0.3),
-                0 0 20px rgba(255, 105, 180, 0.2);
-            animation: friendReveal 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow:
+                0 15px 40px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(255, 105, 180, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            animation: friendReveal 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            letter-spacing: 1px;
         }
 
         @keyframes friendReveal {
             0% {
                 opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
+                transform: scale(0.3) rotate(-15deg);
             }
-            50% {
-                transform: scale(1.2) rotate(5deg);
+
+            30% {
+                transform: scale(1.3) rotate(10deg);
             }
+
+            60% {
+                transform: scale(0.9) rotate(-5deg);
+            }
+
             100% {
                 opacity: 1;
                 transform: scale(1) rotate(0deg);
@@ -523,33 +692,37 @@
         /* Botones de acción mejorados */
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 18px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        .back-btn, .home-btn {
-            background: rgba(255, 255, 255, 0.2);
+        .back-btn,
+        .home-btn {
+            background: rgba(255, 255, 255, 0.25);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50px;
-            padding: 14px 22px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            padding: 16px 28px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             flex: 1;
-            min-width: 130px;
-            max-width: 160px;
-            backdrop-filter: blur(10px);
+            min-width: 140px;
+            max-width: 180px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .back-btn:hover, .home-btn:hover,
-        .back-btn:active, .home-btn:active {
-            background: rgba(255, 255, 255, 0.3);
+        .back-btn:hover,
+        .home-btn:hover,
+        .back-btn:active,
+        .home-btn:active {
+            background: rgba(255, 255, 255, 0.35);
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.7);
         }
 
         /* Confeti mejorado con múltiples formas */
@@ -565,49 +738,70 @@
 
         .confetti-piece {
             position: absolute;
-            animation: confetti-fall 4s linear forwards;
+            animation: confetti-fall 5s linear forwards;
         }
 
         .confetti-heart {
-            width: 10px;
-            height: 9px;
+            width: 12px;
+            height: 11px;
             background: #ff69b4;
             transform: rotate(-45deg);
-            border-radius: 5px 5px 0 5px;
+            border-radius: 6px 6px 0 6px;
         }
 
         .confetti-heart::before,
         .confetti-heart::after {
             content: '';
             position: absolute;
-            width: 5px;
-            height: 8px;
+            width: 6px;
+            height: 9px;
             background: #ff69b4;
-            border-radius: 5px 5px 0 0;
+            border-radius: 6px 6px 0 0;
         }
 
         .confetti-heart::before {
-            top: -4px;
+            top: -4.5px;
             left: 0;
         }
 
         .confetti-heart::after {
-            top: -4px;
+            top: -4.5px;
             right: 0;
         }
 
         .confetti-circle {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: #ffc0cb;
             border-radius: 50%;
         }
 
         .confetti-square {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: #ff1744;
-            border-radius: 2px;
+            border-radius: 3px;
+        }
+
+        .confetti-star {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 7px solid #e91e63;
+            position: relative;
+        }
+
+        .confetti-star::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 3px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 7px solid #e91e63;
         }
 
         @keyframes confetti-fall {
@@ -615,77 +809,161 @@
                 transform: translateY(-100vh) rotate(0deg) scale(1);
                 opacity: 1;
             }
+
             100% {
-                transform: translateY(100vh) rotate(720deg) scale(0.5);
+                transform: translateY(100vh) rotate(1080deg) scale(0.3);
                 opacity: 0;
             }
         }
 
         @keyframes ripple-effect {
             to {
-                transform: scale(4);
+                transform: scale(5);
                 opacity: 0;
             }
         }
 
         /* Responsive mejorado */
-        @media (max-width: 360px) {
+        @media (max-width: 380px) {
             .players-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 15px;
             }
-            
+
             .player-btn {
-                font-size: 0.95rem;
-                padding: 22px 15px;
+                font-size: 1rem;
+                padding: 25px 20px;
             }
-            
+
             .welcome-title {
-                font-size: 2.3rem;
+                font-size: 2.8rem;
             }
-            
+
             .section-title h1 {
-                font-size: 1.7rem;
+                font-size: 1.9rem;
             }
 
             .heart {
-                width: 100px;
-                height: 90px;
+                width: 120px;
+                height: 108px;
             }
 
             .heart:before,
             .heart:after {
-                width: 50px;
-                height: 80px;
+                width: 60px;
+                height: 96px;
             }
 
             .heart:before {
-                top: -40px;
+                top: -48px;
             }
 
             .heart:after {
-                top: -40px;
+                top: -48px;
             }
         }
 
-        @media (max-height: 600px) {
+        @media (max-height: 650px) {
             .players-grid {
-                max-height: 50vh;
+                max-height: 55vh;
             }
         }
+
+        /* Animación de entrada para cada jugador */
+        .player-btn {
+            animation: playerEntrance 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes playerEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Retraso escalonado para cada botón */
+        .player-btn:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .player-btn:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .player-btn:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .player-btn:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .player-btn:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .player-btn:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .player-btn:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .player-btn:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        .player-btn:nth-child(9) {
+            animation-delay: 0.9s;
+        }
+
+        .player-btn:nth-child(10) {
+            animation-delay: 1.0s;
+        }
+
+        .player-btn:nth-child(11) {
+            animation-delay: 1.1s;
+        }
+
+        .player-btn:nth-child(12) {
+            animation-delay: 1.2s;
+        }
+
+        .player-btn:nth-child(13) {
+            animation-delay: 1.3s;
+        }
+
+        .player-btn:nth-child(14) {
+            animation-delay: 1.4s;
+        }
+
+        .player-btn:nth-child(15) {
+            animation-delay: 1.5s;
+        }
+
+        .player-btn:nth-child(16) {
+            animation-delay: 1.6s;
+        }
     </style>
+
 </head>
+
 <body>
     <div class="particles" id="particles"></div>
-    
+
     <div class="container">
         <!-- Pantalla de Inicio -->
         <div id="welcomeScreen" class="welcome-screen">
-            <div class="welcome-title">Amigo Secreto</div>
+            <div class="welcome-title">
+                <h1>Amigo Secreto</h1>
+            </div>
             <div class="welcome-subtitle">Descubre tu sorpresa especial</div>
             <div class="welcome-description">
-                ¡Bienvenido al intercambio más emocionante! Cada persona tiene asignado un amigo especial. 
-                Selecciona tu nombre para descubrir la gran sorpresa.
+                ¡Bienvenido al intercambio más emocionante! Cada persona tiene asignado un amigo especial.
+                Selecciona tu nombre e ingresa tu contraseña para descubrir la gran sorpresa.
             </div>
             <button class="start-btn" onclick="startGame()">Comenzar Aventura</button>
         </div>
@@ -694,26 +972,42 @@
         <div class="game-area" id="gameArea">
             <div class="section-title">
                 <h1>¿Quién eres tú?</h1>
-                <p>Toca tu nombre para la gran revelación</p>
+                <p>Toca tu nombre para ingresar tu contraseña</p>
             </div>
 
             <div id="playersSection" class="players-grid">
-                <button class="player-btn" onclick="showPrivacyModal('Alejandro Sterling')">Alejandro Sterling</button>
-                <button class="player-btn" onclick="showPrivacyModal('Anderson Castillo')">Anderson Castillo</button>
-                <button class="player-btn" onclick="showPrivacyModal('Anderson Etk30')">Anderson Etk30</button>
-                <button class="player-btn" onclick="showPrivacyModal('Andrea')">Andrea</button>
-                <button class="player-btn" onclick="showPrivacyModal('Camilo Meneses')">Camilo Meneses</button>
-                <button class="player-btn" onclick="showPrivacyModal('Cristhian Jimenez')">Cristhian Jimenez</button>
-                <button class="player-btn" onclick="showPrivacyModal('David')">David</button>
-                <button class="player-btn" onclick="showPrivacyModal('Jeferson Pico')">Jeferson Pico</button>
-                <button class="player-btn" onclick="showPrivacyModal('Jhon Jairo')">Jhon Jairo</button>
-                <button class="player-btn" onclick="showPrivacyModal('Jhonatan Truque')">Jhonatan Truque</button>
-                <button class="player-btn" onclick="showPrivacyModal('Jorgito')">Jorgito</button>
-                <button class="player-btn" onclick="showPrivacyModal('Julian Bolaños')">Julian Bolaños</button>
-                <button class="player-btn" onclick="showPrivacyModal('Marycruz')">Marycruz</button>
-                <button class="player-btn" onclick="showPrivacyModal('Mileidy')">Mileidy</button>
-                <button class="player-btn" onclick="showPrivacyModal('Nikol Yulian')">Nikol Yulian</button>
-                <button class="player-btn" onclick="showPrivacyModal('Yenny')">Yenny</button>
+                <button class="player-btn" data-name="Alejandro Sterling" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Alejandro Sterling</button>
+                <button class="player-btn" data-name="Anderson Castillo" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Anderson Castillo</button>
+                <button class="player-btn" data-name="Anderson Etk30" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Anderson Etk30</button>
+                <button class="player-btn" data-name="Andrea" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Andrea</button>
+                <button class="player-btn" data-name="Camilo Meneses" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Camilo Meneses</button>
+                <button class="player-btn" data-name="Cristhian Jimenez" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Cristhian Jimenez</button>
+                <button class="player-btn" data-name="David" disabled
+                    onclick="showPasswordModal(this.dataset.name)">David</button>
+                <button class="player-btn" data-name="Jeferson Pico" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Jeferson Pico</button>
+                <button class="player-btn" data-name="Jhon Jairo" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Jhon Jairo</button>
+                <button class="player-btn" data-name="Jhonatan Truque" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Jhonatan Truque</button>
+                <button class="player-btn" data-name="Jorgito" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Jorgito</button>
+                <button class="player-btn" data-name="Julian Bolaños" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Julian Bolaños</button>
+                <button class="player-btn" data-name="Marycruz" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Marycruz</button>
+                <button class="player-btn" data-name="Mileidy" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Mileidy</button>
+                <button class="player-btn" data-name="Nikol Yulian" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Nikol Yulian</button>
+                <button class="player-btn" data-name="Yenny" disabled
+                    onclick="showPasswordModal(this.dataset.name)">Yenny</button>
             </div>
 
             <div class="action-buttons">
@@ -728,7 +1022,7 @@
                     </div>
                 </div>
                 <div class="result-text">
-                    <h2>Tu Amigo Secreto es:</h2>
+                    <h2>🎁 Tu Amigo Secreto es:</h2>
                     <div class="secret-friend" id="friendName"></div>
                 </div>
                 <div class="action-buttons">
@@ -739,279 +1033,156 @@
         </div>
     </div>
 
-    <!-- Modal de Privacidad -->
-    <div class="privacy-modal" id="privacyModal">
-        <div class="privacy-content">
-            <div class="privacy-title">¡Momento Especial!</div>
-            <div class="privacy-text">
+    <!-- Modal de Contraseña -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-content">
+            <div class="password-title">🔐 Acceso Secreto</div>
+            <div class="password-text">
                 ¡Hola <span id="currentPlayer"></span>!<br><br>
-                Asegúrate de estar solo para mantener la sorpresa del intercambio.
-                <br><br>
-                ¿Estás listo para la gran revelación?
+                Ingresa tu contraseña secreta para descubrir a tu amigo especial.
             </div>
-            <button class="continue-btn" onclick="revealFriend()">¡Revelar Sorpresa!</button>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Contraseña secreta"
+                maxlength="20">
+            <div id="errorMessage" class="error-message">❌ Contraseña incorrecta. Inténtalo de nuevo.</div>
+            <div class="password-buttons">
+                <button class="verify-btn" onclick="verifyPassword()">Verificar</button>
+                <button class="cancel-btn" onclick="closePasswordModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Contraseña -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-content">
+            <div class="password-title">🔐 Acceso Secreto</div>
+            <div class="password-text">
+                ¡Hola <span id="currentPlayer"></span>!<br><br>
+                Ingresa tu contraseña secreta para descubrir a tu amigo especial.
+            </div>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Contraseña secreta"
+                maxlength="20">
+            <div id="errorMessage" class="error-message">
+                ❌ Contraseña incorrecta. Inténtalo de nuevo.
+            </div>
+            <div class="password-buttons">
+                <button class="verify-btn" onclick="verifyPassword()">Verificar</button>
+                <button class="cancel-btn" onclick="closePasswordModal()">Cancelar</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Asignaciones del amigo secreto
-        const secretFriends = {
-            'Marycruz': 'Nikol Yulian',
-            'Jhon Jairo': 'Marycruz',
-            'Alejandro Sterling': 'Anderson Castillo',
-            'Anderson Castillo': 'Yenny',
-            'Anderson Etk30': 'Jorgito',
-            'Andrea': 'Mileidy',
-            'Camilo Meneses': 'David',
-            'Cristhian Jimenez': 'Jhonatan Truque',
-            'David': 'Andrea',
-            'Jeferson Pico': 'Julian Bolaños',
-            'Jhonatan Truque': 'Jeferson Pico',
-            'Jorgito': 'Alejandro Sterling',
-            'Julian Bolaños': 'Cristhian Jimenez',
-            'Mileidy': 'Anderson Etk30',
-            'Nikol Yulian': 'Camilo Meneses',
-            'Yenny': 'Jhon Jairo'
+        // Contraseñas fáciles para cada persona
+        const passwords = {
+            'Marycruz': 'amor123',
+            'Jhon Jairo': 'corazon',
+            'Alejandro Sterling': 'estrella',
+            'Anderson Castillo': 'castillo',
+            'Anderson Etk30': 'moto30',
+            'Andrea': 'andrea2024',
+            'Camilo Meneses': 'camilo',
+            'Cristhian Jimenez': 'cristhian',
+            'David': 'david123',
+            'Jeferson Pico': 'jeferson',
+            'Jhonatan Truque': 'jhonatan',
+            'Jorgito': 'jorge',
+            'Julian Bolaños': 'julian',
+            'Mileidy': 'mileidy',
+            'Nikol Yulian': 'nikol',
+            'Yenny': 'yenny2024'
         };
 
-        let currentPlayerName = '';
+         let secretFriends = {};
+    let isAssignmentsGenerated = false;
+    let currentPlayerName = "";
 
-        // Función para crear partículas flotantes
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            
-            setInterval(() => {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                particle.style.animationDuration = Math.random() * 3 + 6 + 's';
-                
-                const colors = ['rgba(255, 255, 255, 0.6)', 'rgba(255, 192, 203, 0.6)', 'rgba(255, 105, 180, 0.6)'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                particlesContainer.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 9000);
-            }, 300);
-        }
 
-        // Función para limpiar resultados anteriores
-        function clearPreviousResult() {
-            document.getElementById('friendName').textContent = '';
-            const existingConfetti = document.querySelectorAll('.confetti-container');
-            existingConfetti.forEach(c => c.remove());
-        }
+    function generateSecretFriends() {
+      if (isAssignmentsGenerated) return;
 
-        // Función para iniciar el juego
-        function startGame() {
-            document.getElementById('welcomeScreen').style.display = 'none';
-            document.getElementById('gameArea').style.display = 'block';
-        }
+      secretFriends = {};
 
-        // Función para volver al inicio
-        function goHome() {
-            clearPreviousResult();
-            document.getElementById('gameArea').style.display = 'none';
-            document.getElementById('revealSection').style.display = 'none';
-            document.getElementById('playersSection').style.display = 'grid';
-            document.getElementById('welcomeScreen').style.display = 'block';
-            currentPlayerName = '';
-        }
+      // Asignaciones fijas
+      secretFriends["Marycruz"] = "Jhon Jairo";
+      secretFriends["Jhon Jairo"] = "Marycruz";
 
-        // Función para mostrar modal de privacidad
-        function showPrivacyModal(playerName) {
-            clearPreviousResult();
-            currentPlayerName = playerName;
-            document.getElementById('currentPlayer').textContent = playerName;
-            document.getElementById('privacyModal').style.display = 'flex';
-        }
+      const remainingPeople = [
+        "Alejandro Sterling", "Anderson Castillo", "Anderson Etk30", "Andrea",
+        "Camilo Meneses", "Cristhian Jimenez", "David", "Jeferson Pico",
+        "Jhonatan Truque", "Jorgito", "Julian Bolaños", "Mileidy",
+        "Nikol Yulian", "Yenny"
+      ];
 
-        // Función para revelar el amigo secreto
-        function revealFriend() {
-            const privacyModal = document.getElementById('privacyModal');
-            const playersSection = document.getElementById('playersSection');
-            const revealSection = document.getElementById('revealSection');
-            const friendNameElement = document.getElementById('friendName');
-            
-            // Ocultar modal de privacidad con animación
-            privacyModal.style.opacity = '0';
-            setTimeout(() => {
-                privacyModal.style.display = 'none';
-                privacyModal.style.opacity = '1';
-            }, 300);
-            
-            // Ocultar lista de jugadores
-            playersSection.style.display = 'none';
-            
-            // Delay para crear suspense
-            setTimeout(() => {
-                // Obtener y mostrar amigo secreto
-                const friend = secretFriends[currentPlayerName];
-                friendNameElement.textContent = friend;
-                revealSection.style.display = 'block';
-                
-                // Crear confeti mejorado
-                createAdvancedConfetti();
-                
-                // Vibración en móviles si está disponible
-                if ('vibrate' in navigator) {
-                    navigator.vibrate([200, 100, 200]);
-                }
-            }, 400);
-        }
+      const shuffled = [...remainingPeople];
 
-        // Función para volver a la lista de jugadores
-        function goBack() {
-            clearPreviousResult();
-            document.getElementById('revealSection').style.display = 'none';
-            document.getElementById('playersSection').style.display = 'grid';
-            currentPlayerName = '';
-        }
+      // Fisher-Yates shuffle
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
 
-        // Función para crear confeti avanzado
-        function createAdvancedConfetti() {
-            const confettiContainer = document.createElement('div');
-            confettiContainer.className = 'confetti-container';
-            document.body.appendChild(confettiContainer);
+      // Rotación para asignar
+      for (let i = 0; i < shuffled.length; i++) {
+        const giver = shuffled[i];
+        const receiver = shuffled[(i + 1) % shuffled.length];
+        secretFriends[giver] = receiver;
+      }
 
-            const shapes = ['heart', 'circle', 'square'];
-            const colors = ['#ff69b4', '#ff1744', '#ffc0cb', '#e91e63', '#f06292'];
+      isAssignmentsGenerated = true;
+      console.table(secretFriends);
+    }
 
-            for (let i = 0; i < 80; i++) {
-                setTimeout(() => {
-                    const piece = document.createElement('div');
-                    piece.className = 'confetti-piece';
-                    
-                    const shape = shapes[Math.floor(Math.random() * shapes.length)];
-                    const shapeDiv = document.createElement('div');
-                    shapeDiv.className = `confetti-${shape}`;
-                    
-                    if (shape !== 'heart') {
-                        shapeDiv.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    }
-                    
-                    piece.appendChild(shapeDiv);
-                    piece.style.left = Math.random() * 100 + 'vw';
-                    piece.style.animationDelay = Math.random() * 2 + 's';
-                    piece.style.animationDuration = Math.random() * 2 + 3 + 's';
-                    
-                    confettiContainer.appendChild(piece);
-                }, i * 40);
-            }
+    function startGame() {
+      generateSecretFriends();
+      document.querySelectorAll(".player-btn").forEach(btn => btn.disabled = false);
+      document.getElementById("welcomeScreen").style.display = "none";
+      document.getElementById("gameArea").style.display = "block";
+    }
 
-            // Eliminar confeti después de la animación
-            setTimeout(() => {
-                if (confettiContainer.parentNode) {
-                    confettiContainer.parentNode.removeChild(confettiContainer);
-                }
-            }, 6000);
-        }
+    function showPasswordModal(playerName) {
+      currentPlayerName = playerName;
+      document.getElementById("currentPlayer").textContent = playerName;
+      document.getElementById("passwordInput").value = "";
+      document.getElementById("errorMessage").style.display = "none";
+      document.getElementById("passwordModal").style.display = "flex";
+    }
 
-        // Efectos de interacción mejorados
-        function addInteractiveEffects() {
-            // Efecto ripple en botones
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('player-btn') || 
-                    e.target.classList.contains('start-btn') ||
-                    e.target.classList.contains('continue-btn')) {
-                    
-                    const ripple = document.createElement('span');
-                    const rect = e.target.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size / 2;
-                    const y = e.clientY - rect.top - size / 2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        width: ${size}px;
-                        height: ${size}px;
-                        left: ${x}px;
-                        top: ${y}px;
-                        background: rgba(255, 255, 255, 0.5);
-                        border-radius: 50%;
-                        transform: scale(0);
-                        animation: ripple-effect 0.6s linear;
-                        pointer-events: none;
-                    `;
-                    
-                    e.target.style.position = 'relative';
-                    e.target.style.overflow = 'hidden';
-                    e.target.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        if (ripple.parentNode) {
-                            ripple.parentNode.removeChild(ripple);
-                        }
-                    }, 600);
-                }
-            });
-        }
+    function closePasswordModal() {
+      document.getElementById("passwordModal").style.display = "none";
+    }
 
-        // Inicialización mejorada
-        window.addEventListener('load', function() {
-            createParticles();
-            addInteractiveEffects();
-            
-            // Optimizaciones móviles
-            if ('ontouchstart' in window) {
-                document.body.style.webkitUserSelect = 'none';
-                document.body.style.userSelect = 'none';
-                
-                // Prevenir bounce en iOS
-                document.body.addEventListener('touchstart', function(e) {
-                    if (e.target.tagName === 'BUTTON') {
-                        e.target.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            e.target.style.transform = '';
-                        }, 150);
-                    }
-                }, { passive: true });
-            }
-        });
+    function verifyPassword() {
+      const inputPassword = document.getElementById("passwordInput").value;
+      if (passwords[currentPlayerName] === inputPassword) {
+        revealFriend();
+      } else {
+        document.getElementById("errorMessage").style.display = "block";
+      }
+    }
 
-        // Prevenir zoom y gestos en móviles
-        document.addEventListener('gesturestart', function(e) {
-            e.preventDefault();
-        });
+    function revealFriend() {
+      const friend = secretFriends[currentPlayerName];
+      const friendNameElement = document.getElementById("friendName");
+      if (!friend) {
+        friendNameElement.textContent = "⚠️ No se encontró asignación.";
+      } else {
+        friendNameElement.textContent = friend;
+      }
+      document.getElementById("passwordModal").style.display = "none";
+      document.getElementById("revealSection").style.display = "block";
+    }
 
-        document.addEventListener('touchstart', function(e) {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
+    function goBack() {
+      document.getElementById("revealSection").style.display = "none";
+    }
 
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(e) {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, { passive: false });
-
-        // Prevenir selección de texto en móviles
-        document.addEventListener('selectstart', function(e) {
-            e.preventDefault();
-        });
-
-        // Efecto de parallax suave en scroll
-        if (window.DeviceMotionEvent) {
-            window.addEventListener('devicemotion', function(e) {
-                const x = e.accelerationIncludingGravity.x;
-                const y = e.accelerationIncludingGravity.y;
-                
-                const particles = document.getElementById('particles');
-                if (particles) {
-                    particles.style.transform = `translate(${x * 2}px, ${y * 2}px)`;
-                }
-            });
-        }
-        
+    function goHome() {
+      isAssignmentsGenerated = false;
+      document.getElementById("welcomeScreen").style.display = "block";
+      document.getElementById("gameArea").style.display = "none";
+      document.getElementById("revealSection").style.display = "none";
+      document.querySelectorAll(".player-btn").forEach(btn => btn.disabled = true);
+    }
     </script>
 </body>
+
 </html>
