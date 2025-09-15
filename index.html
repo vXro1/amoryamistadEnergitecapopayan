@@ -1099,24 +1099,16 @@ function generateSecretFriends() {
     if (isAssignmentsGenerated) return;
 
     secretFriends = {};
-
-    // Pareja fija
     secretFriends["Marycruz"] = "Jhon Jairo";
     secretFriends["Jhon Jairo"] = "Marycruz";
-
-    // Asignaciones fijas (hechas manualmente)
     secretFriends["Alejandro Sterling"] = "Andrea";
     secretFriends["Andrea"] = "Julian Bolaños";
 
     secretFriends["Julian Bolaños"] = "Camilo Meneses";
     secretFriends["Camilo Meneses"] = "Mileidy";
+    secretFriends["Mileidy"] = "David"; 
 
-    // 🚫 Evitamos Mileidy ↔ Nikol
-    secretFriends["Mileidy"] = "Andrea"; // ✅ Mileidy ahora le toca a Andrea
-
-    secretFriends["Anderson Castillo"] = "David";
     secretFriends["David"] = "Jorgito";
-
     secretFriends["Jorgito"] = "Cristhian Jimenez";
     secretFriends["Cristhian Jimenez"] = "Anderson Etk30";
 
@@ -1127,6 +1119,7 @@ function generateSecretFriends() {
     // Bloque delicado → Nikol separado de Mileidy
     secretFriends["Nikol Yulian"] = "Yenny";
     secretFriends["Yenny"] = "Anderson Castillo";
+    secretFriends["Anderson Castillo"] = "Nikol Yulian"; // cierre del mini ciclo
 
     isAssignmentsGenerated = true;
     console.table(secretFriends);
