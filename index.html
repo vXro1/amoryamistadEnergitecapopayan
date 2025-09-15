@@ -1071,110 +1071,116 @@
     </div>
 
    <script>
-    // Contraseñas fáciles para cada persona
-    const passwords = {
-        'Marycruz': 'amor123',
-        'Jhon Jairo': 'corazon',
-        'Alejandro Sterling': 'estrella',
-        'Anderson Castillo': 'castillo',
-        'Anderson Etk30': 'moto30',
-        'Andrea': 'andrea2024',
-        'Camilo Meneses': 'camilo',
-        'Cristhian Jimenez': 'cristhian',
-        'David': 'david123',
-        'Jeferson Pico': 'jeferson',
-        'Jhonatan Truque': 'jhonatan',
-        'Jorgito': 'jorge',
-        'Julian Bolaños': 'julian',
-        'Mileidy': 'mileidy',
-        'Nikol Yulian': 'nikol',
-        'Yenny': 'yenny2024'
-    };
+  // Contraseñas fáciles para cada persona
+  const passwords = {
+    'Marycruz': 'amor123',
+    'Jhon Jairo': 'corazon',
+    'Alejandro Sterling': 'estrella',
+    'Anderson Castillo': 'castillo',
+    'Anderson Etk30': 'moto30',
+    'Andrea': 'andrea2024',
+    'Camilo Meneses': 'camilo',
+    'Cristhian Jimenez': 'cristhian',
+    'David': 'david123',
+    'Jeferson Pico': 'jeferson',
+    'Jhonatan Truque': 'jhonatan',
+    'Jorgito': 'jorge',
+    'Julian Bolaños': 'julian',
+    'Mileidy': 'mileidy',
+    'Nikol Yulian': 'nikol',
+    'Yenny': 'yenny2024'
+  };
 
-    let secretFriends = {};
-    let isAssignmentsGenerated = false;
-    let currentPlayerName = "";
+  let secretFriends = {};
+  let isAssignmentsGenerated = false;
+  let currentPlayerName = "";
 
-    function generateSecretFriends() {
-        if (isAssignmentsGenerated) return;
+  function generateSecretFriends() {
+    if (isAssignmentsGenerated) return;
 
-        secretFriends = {};
+    secretFriends = {};
 
-        // Asignaciones fijas (mutuas)
-        secretFriends["Marycruz"] = "Jhon Jairo";
-        secretFriends["Jhon Jairo"] = "Marycruz";
+    // Pareja fija
+    secretFriends["Marycruz"] = "Jhon Jairo";
+    secretFriends["Jhon Jairo"] = "Marycruz";
 
-        // Resto asignaciones fijas (ejemplo establecido por mí)
-        secretFriends["Alejandro Sterling"] = "Andrea";
-        secretFriends["Andrea"] = "Julian Bolaños";
-        secretFriends["Julian Bolaños"] = "Anderson Castillo";
-        secretFriends["Anderson Castillo"] = "Cristhian Jimenez";
-        secretFriends["Cristhian Jimenez"] = "Jeferson Pico";
-        secretFriends["Jeferson Pico"] = "David";
-        secretFriends["David"] = "Camilo Meneses";
-        secretFriends["Camilo Meneses"] = "Anderson Etk30";
-        secretFriends["Anderson Etk30"] = "Mileidy";
-        secretFriends["Mileidy"] = "Nikol Yulian";
-        secretFriends["Nikol Yulian"] = "Yenny";
-        secretFriends["Yenny"] = "Jorgito";
-        secretFriends["Jorgito"] = "Jhonatan Truque";
-        secretFriends["Jhonatan Truque"] = "Alejandro Sterling"; // cierre del ciclo
+    // Asignaciones fijas (hechas manualmente)
+    secretFriends["Alejandro Sterling"] = "Andrea";
+    secretFriends["Andrea"] = "Julian Bolaños";
 
-        isAssignmentsGenerated = true;
-        console.table(secretFriends);
+    secretFriends["Julian Bolaños"] = "Camilo Meneses";
+    secretFriends["Camilo Meneses"] = "Anderson Castillo";
+
+    secretFriends["Anderson Castillo"] = "David";
+    secretFriends["David"] = "Jorgito";
+
+    secretFriends["Jorgito"] = "Cristhian Jimenez";
+    secretFriends["Cristhian Jimenez"] = "Anderson Etk30";
+
+    secretFriends["Anderson Etk30"] = "Jhonatan Truque";
+    secretFriends["Jhonatan Truque"] = "Jeferson Pico";
+    secretFriends["Jeferson Pico"] = "Alejandro Sterling";
+
+    // Bloque delicado → separamos Nikol y Mileidy
+    secretFriends["Nikol Yulian"] = "Yenny";
+    secretFriends["Yenny"] = "Mileidy";
+    secretFriends["Mileidy"] = "Nikol Yulian";
+
+    isAssignmentsGenerated = true;
+    console.table(secretFriends);
+  }
+
+  function startGame() {
+    generateSecretFriends();
+    document.querySelectorAll(".player-btn").forEach(btn => btn.disabled = false);
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("gameArea").style.display = "block";
+  }
+
+  function showPasswordModal(playerName) {
+    currentPlayerName = playerName;
+    document.getElementById("currentPlayer").textContent = playerName;
+    document.getElementById("passwordInput").value = "";
+    document.getElementById("errorMessage").style.display = "none";
+    document.getElementById("passwordModal").style.display = "flex";
+  }
+
+  function closePasswordModal() {
+    document.getElementById("passwordModal").style.display = "none";
+  }
+
+  function verifyPassword() {
+    const inputPassword = document.getElementById("passwordInput").value;
+    if (passwords[currentPlayerName] === inputPassword) {
+      revealFriend();
+    } else {
+      document.getElementById("errorMessage").style.display = "block";
     }
+  }
 
-    function startGame() {
-        generateSecretFriends();
-        document.querySelectorAll(".player-btn").forEach(btn => btn.disabled = false);
-        document.getElementById("welcomeScreen").style.display = "none";
-        document.getElementById("gameArea").style.display = "block";
+  function revealFriend() {
+    const friend = secretFriends[currentPlayerName];
+    const friendNameElement = document.getElementById("friendName");
+    if (!friend) {
+      friendNameElement.textContent = "⚠️ No se encontró asignación.";
+    } else {
+      friendNameElement.textContent = friend;
     }
+    document.getElementById("passwordModal").style.display = "none";
+    document.getElementById("revealSection").style.display = "block";
+  }
 
-    function showPasswordModal(playerName) {
-        currentPlayerName = playerName;
-        document.getElementById("currentPlayer").textContent = playerName;
-        document.getElementById("passwordInput").value = "";
-        document.getElementById("errorMessage").style.display = "none";
-        document.getElementById("passwordModal").style.display = "flex";
-    }
+  function goBack() {
+    document.getElementById("revealSection").style.display = "none";
+  }
 
-    function closePasswordModal() {
-        document.getElementById("passwordModal").style.display = "none";
-    }
-
-    function verifyPassword() {
-        const inputPassword = document.getElementById("passwordInput").value;
-        if (passwords[currentPlayerName] === inputPassword) {
-            revealFriend();
-        } else {
-            document.getElementById("errorMessage").style.display = "block";
-        }
-    }
-
-    function revealFriend() {
-        const friend = secretFriends[currentPlayerName];
-        const friendNameElement = document.getElementById("friendName");
-        if (!friend) {
-            friendNameElement.textContent = "⚠️ No se encontró asignación.";
-        } else {
-            friendNameElement.textContent = friend;
-        }
-        document.getElementById("passwordModal").style.display = "none";
-        document.getElementById("revealSection").style.display = "block";
-    }
-
-    function goBack() {
-        document.getElementById("revealSection").style.display = "none";
-    }
-
-    function goHome() {
-        isAssignmentsGenerated = false;
-        document.getElementById("welcomeScreen").style.display = "block";
-        document.getElementById("gameArea").style.display = "none";
-        document.getElementById("revealSection").style.display = "none";
-        document.querySelectorAll(".player-btn").forEach(btn => btn.disabled = true);
-    }
+  function goHome() {
+    isAssignmentsGenerated = false;
+    document.getElementById("welcomeScreen").style.display = "block";
+    document.getElementById("gameArea").style.display = "none";
+    document.getElementById("revealSection").style.display = "none";
+    document.querySelectorAll(".player-btn").forEach(btn => btn.disabled = true);
+  }
 </script>
 
 </body>
