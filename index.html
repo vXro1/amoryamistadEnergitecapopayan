@@ -1109,7 +1109,10 @@ function generateSecretFriends() {
     secretFriends["Andrea"] = "Julian Bolaños";
 
     secretFriends["Julian Bolaños"] = "Camilo Meneses";
-    secretFriends["Camilo Meneses"] = "Mileidy"; // ✅ corregido (sin espacio extra)
+    secretFriends["Camilo Meneses"] = "Mileidy";
+
+    // 🚫 Evitamos Mileidy ↔ Nikol
+    secretFriends["Mileidy"] = "Andrea"; // ✅ Mileidy ahora le toca a Andrea
 
     secretFriends["Anderson Castillo"] = "David";
     secretFriends["David"] = "Jorgito";
@@ -1121,10 +1124,9 @@ function generateSecretFriends() {
     secretFriends["Jhonatan Truque"] = "Jeferson Pico";
     secretFriends["Jeferson Pico"] = "Alejandro Sterling";
 
-    // Bloque delicado → separamos Nikol y Mileidy
+    // Bloque delicado → Nikol separado de Mileidy
     secretFriends["Nikol Yulian"] = "Yenny";
     secretFriends["Yenny"] = "Anderson Castillo";
-    secretFriends["Mileidy"] = "Nikol Yulian";
 
     isAssignmentsGenerated = true;
     console.table(secretFriends);
